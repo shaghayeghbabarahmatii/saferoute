@@ -1,0 +1,12 @@
+export const environment = {
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyChLGcu_o5bOmOBRBqwr2l0-2yr60qEcSA",
+    authDomain: "saferoute-1080b.firebaseapp.com",
+    databaseURL: "https://saferoute-1080b-default-rtdb.firebaseio.com",
+    projectId: "saferoute-1080b",
+    storageBucket: "saferoute-1080b.firebasestorage.app",
+    messagingSenderId: "451801554863",
+    appId: "1:451801554863:web:9e78905758b6fe756b595a"
+  }
+};
