@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  background: linear-gradient(135deg, #1F2937, #374151);
 }
 .auth-card {
   background: white;
@@ -14,26 +14,33 @@
   box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 .auth-header { text-align: center; margin-bottom: 28px; }
-.auth-header h1 { font-size: 1.8rem; color: #1a1a2e; margin: 0 0 6px; }
-.auth-header p { color: #666; margin: 0; }
+.auth-header h1 { font-size: 1.8rem; color: #1F2937; margin: 0 0 6px; }
+.auth-header p { color: #6B7280; margin: 0; }
 .form-group { margin-bottom: 18px; }
 .form-group label { display: block; font-size: 0.85rem;
-                    font-weight: 600; color: #333; margin-bottom: 6px; }
+                    font-weight: 600; color: #374151; margin-bottom: 6px; }
 .form-group input {
-  width: 100%; padding: 10px 14px; border: 1.5px solid #ddd;
+  width: 100%; padding: 10px 14px; border: 1.5px solid #D1D5DB;
   border-radius: 8px; font-size: 1rem; box-sizing: border-box;
   transition: border-color 0.2s;
 }
-.form-group input:focus { outline: none; border-color: #4361ee; }
+.form-group input:focus { outline: none; border-color: #F97316; }
 .btn-primary {
-  width: 100%; padding: 12px; background: #4361ee; color: white;
+  width: 100%; padding: 12px; background: #F97316; color: white;
   border: none; border-radius: 8px; font-size: 1rem;
   font-weight: 600; cursor: pointer; transition: background 0.2s;
 }
-.btn-primary:hover:not(:disabled) { background: #3a56d4; }
+.btn-primary:hover:not(:disabled) { background: #EA6C0A; }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
-.error { color: #e63946; font-size: 0.85rem; margin: -8px 0 12px; }
+.error { color: #EF4444; font-size: 0.85rem; margin: -8px 0 12px; }
 .toggle-text { text-align: center; margin-top: 20px;
-               font-size: 0.9rem; color: #666; }
-.toggle-text span { color: #4361ee; cursor: pointer; font-weight: 600; }
+               font-size: 0.9rem; color: #6B7280; }
+.toggle-text span { color: #F97316; cursor: pointer; font-weight: 600; }
 .toggle-text span:hover { text-decoration: underline; }
+
+.auth-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
