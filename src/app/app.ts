@@ -1,12 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Auth, authState } from '@angular/fire/auth';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [RouterOutlet, CommonModule, NavbarComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('saferoute');
+  private auth = inject(Auth);
+  showNav = false;
+
+  constructor() {
+    authState(this.auth).subscribe(user => this.showNav = !!user);
+  }
 }
