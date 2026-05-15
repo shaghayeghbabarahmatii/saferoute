@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #1F2937, #374151);
+  padding-top: 60px;
 }
 .auth-card {
   background: white;
@@ -37,7 +38,6 @@
                font-size: 0.9rem; color: #6B7280; }
 .toggle-text span { color: #F97316; cursor: pointer; font-weight: 600; }
 .toggle-text span:hover { text-decoration: underline; }
-
 .auth-logo {
   width: 70px;
   height: 70px;

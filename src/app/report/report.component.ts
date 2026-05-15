@@ -1,20 +1,21 @@
-import { Component, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Auth } from '@angular/fire/auth';
-import { Database, ref, push } from '@angular/fire/database';
+import { MContainerComponent } from '../m-framework/components/m-container/m-container.component';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, push } from 'firebase/database';
+import { environment } from '../../environments/environments';
 
 @Component({
   selector: 'app-report',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MContainerComponent],
   templateUrl: './report.component.html',
   styleUrl: './report.component.css'
 })
 export class ReportComponent {
-  private auth = inject(Auth);
-  private db   = inject(Database);
-  private cdr  = inject(ChangeDetectorRef);
+  private cdr = inject(ChangeDetectorRef);
+  private db: any;
 
   categories = ['Poorly Lit Street', 'Damaged Infrastructure',
                 'Security Concern', 'Environmental Hazard'];
@@ -23,16 +24,20 @@ export class ReportComponent {
   category    = '';
   severity    = '';
   description = '';
-
   locationStatus = '';
   coords: { lat: number; lng: number } | null = null;
   submitting = false;
   successMsg = '';
   errorMsg   = '';
 
+  constructor() {
+    const app = initializeApp(environment.firebaseConfig);
+    this.db = getDatabase(app);
+  }
+
   getLocation() {
     if (!navigator.geolocation) {
-      this.locationStatus = 'Geolocation not supported by your browser.';
+      this.locationStatus = 'Geolocation not supported.';
       this.cdr.detectChanges();
       return;
     }
@@ -60,34 +65,21 @@ export class ReportComponent {
       this.errorMsg = 'Please capture your location first.';
       return;
     }
-
     this.submitting = true;
     this.errorMsg   = '';
     this.successMsg = '';
     this.cdr.detectChanges();
-
     try {
-      const uid = this.auth.currentUser?.uid;
-      const report = {
-        uid:         uid,
-        category:    this.category,
-        severity:    this.severity,
-        description: this.description,
-        lat:         this.coords.lat,
-        lng:         this.coords.lng,
-        timestamp:   Date.now(),
-        upvotes:     0,
-        disputes:    0,
-        verified:    false
-      };
-
-      await push(ref(this.db, 'reports'), report);
-
+      const uid = localStorage.getItem('saferoute_user') || 'anonymous';
+      await push(ref(this.db, 'reports'), {
+        uid, category: this.category, severity: this.severity,
+        description: this.description, lat: this.coords.lat,
+        lng: this.coords.lng, timestamp: Date.now(),
+        upvotes: 0, disputes: 0, verified: false
+      });
       this.successMsg  = '✅ Report submitted successfully!';
-      this.category    = '';
-      this.severity    = '';
-      this.description = '';
-      this.coords      = null;
+      this.category = ''; this.severity = '';
+      this.description = ''; this.coords = null;
       this.locationStatus = '';
       this.cdr.detectChanges();
     } catch (e) {

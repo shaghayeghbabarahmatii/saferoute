@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { MContainerComponent } from '../m-framework/components/m-container/m-container.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [MContainerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

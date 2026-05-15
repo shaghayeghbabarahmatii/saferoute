@@ -1,48 +1,52 @@
-<div class="report-wrapper">
-  <div class="report-card">
-    <h2>🚨 Submit a Safety Report</h2>
-    <p class="subtitle">Help your community by reporting unsafe areas.</p>
+<m-container>
+  <h2>🚨 Submit a Safety Report</h2>
+  <p>Help your community by reporting unsafe areas.</p>
 
-    <div class="form-group">
-      <label>Category</label>
-      <select [(ngModel)]="category">
-        <option value="" disabled>Select a category</option>
-        <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
-      </select>
-    </div>
+  <div class="form-group">
+    <label>Category</label>
+    <select [(ngModel)]="category">
+      <option value="" disabled>Select a category</option>
+      @for (c of categories; track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+  </div>
 
-    <div class="form-group">
-      <label>Severity</label>
-      <div class="severity-buttons">
-        <button *ngFor="let s of severities"
-                [class]="'sev-btn ' + s.toLowerCase()"
-                [class.active]="severity === s"
-                (click)="severity = s">
+  <div class="form-group">
+    <label>Severity</label>
+    <div class="severity-buttons">
+      @for (s of severities; track s) {
+        <button
+          [class]="'sev-btn ' + s.toLowerCase()"
+          [class.active]="severity === s"
+          (click)="severity = s">
           {{ s }}
         </button>
-      </div>
+      }
     </div>
-
-    <div class="form-group">
-      <label>Description</label>
-      <textarea [(ngModel)]="description"
-                placeholder="Describe the safety issue..."
-                rows="4"></textarea>
-    </div>
-
-    <div class="form-group">
-      <label>Location</label>
-      <button class="btn-location" (click)="getLocation()">
-        📍 Capture My Location
-      </button>
-      <p class="location-status" *ngIf="locationStatus">{{ locationStatus }}</p>
-    </div>
-
-    <p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>
-    <p *ngIf="successMsg" class="success">{{ successMsg }}</p>
-
-    <button class="btn-submit" (click)="submitReport()" [disabled]="submitting">
-      {{ submitting ? 'Submitting...' : 'Submit Report' }}
-    </button>
   </div>
-</div>
+
+  <div class="form-group">
+    <label>Description</label>
+    <textarea [(ngModel)]="description"
+              placeholder="Describe the safety issue..."
+              rows="4"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Location</label>
+    <button class="btn-location" (click)="getLocation()">
+      📍 Capture My Location
+    </button>
+    @if (locationStatus) {
+      <p class="location-status">{{ locationStatus }}</p>
+    }
+  </div>
+
+  @if (errorMsg) { <p class="error">{{ errorMsg }}</p> }
+  @if (successMsg) { <p class="success">{{ successMsg }}</p> }
+
+  <button class="btn-submit" (click)="submitReport()" [disabled]="submitting">
+    {{ submitting ? 'Submitting...' : 'Submit Report' }}
+  </button>
+</m-container>

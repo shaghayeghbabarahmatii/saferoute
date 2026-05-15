@@ -1,0 +1,19 @@
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+        <div class="logo-container">
+            <img src="Logo.jpg" alt="Logo">
+        </div>
+        <p class="logo-title pure-menu-heading">{{title}}</p>
+        <div class="nav-right">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="home" class="pure-menu-link">{{homename}}</a>
+                </li>
+                <li *ngFor="let feature of features" class="pure-menu-item">
+                    <a href="{{feature2path(feature)}}" class="pure-menu-link">{{feature}}</a>
+                </li>
+            </ul>
+            <button class="logout-btn" (click)="logout()">Logout</button>
+        </div>
+    </div>
+</div>

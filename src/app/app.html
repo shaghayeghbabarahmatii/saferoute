@@ -1,2 +1,6 @@
-<app-navbar *ngIf="showNav"></app-navbar>
+<m-header 
+  [title]="'SafeRoute'"
+  [homename]="'Map'"
+  [features]="['Report', 'Profile']">
+</m-header>
 <router-outlet></router-outlet>

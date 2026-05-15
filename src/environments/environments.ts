@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  firebase: {
+  firebaseConfig: {
     apiKey: "AIzaSyChLGcu_o5bOmOBRBqwr2l0-2yr60qEcSA",
     authDomain: "saferoute-1080b.firebaseapp.com",
     databaseURL: "https://saferoute-1080b-default-rtdb.firebaseio.com",
