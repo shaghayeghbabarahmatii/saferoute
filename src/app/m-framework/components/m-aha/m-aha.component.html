@@ -4,9 +4,15 @@
             <label class="close">
             </label>
             <h3 [ngClass]="type + '-text'">
-                <i *ngIf="type === 'warning'" class="fas fa-exclamation-triangle"></i>
-                <i *ngIf="type === 'error'" class="fas fa-times-circle"></i>
-                <i *ngIf="type === 'success'" class="fas fa-check-circle"></i>
+                @if (type === 'warning') {
+                    <i class="fas fa-exclamation-triangle"></i>
+                }
+                @if (type === 'error') {
+                    <i class="fas fa-times-circle"></i>
+                }
+                @if (type === 'success') {
+                    <i class="fas fa-check-circle"></i>
+                }
                 {{ header || 'Alert' }}</h3>
             <p><ng-content></ng-content></p>
         </div>

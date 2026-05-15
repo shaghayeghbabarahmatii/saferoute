@@ -6,10 +6,12 @@
       <p>{{ isLogin ? 'Sign in to your account' : 'Create a new account' }}</p>
     </div>
 
-    <div *ngIf="!isLogin" class="form-group">
-      <label>Full Name</label>
-      <input type="text" [(ngModel)]="name" placeholder="Your name" />
-    </div>
+    @if (!isLogin) {
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" [(ngModel)]="name" placeholder="Your name" />
+      </div>
+    }
 
     <div class="form-group">
       <label>Email</label>
@@ -21,7 +23,9 @@
       <input type="password" [(ngModel)]="password" placeholder="••••••••" />
     </div>
 
-    <p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>
+    @if (errorMsg) {
+      <p class="error">{{ errorMsg }}</p>
+    }
 
     <button class="btn-primary" (click)="submit()" [disabled]="loading">
       {{ loading ? 'Please wait...' : (isLogin ? 'Sign In' : 'Register') }}
