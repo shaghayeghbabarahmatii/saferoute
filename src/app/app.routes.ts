@@ -13,21 +13,21 @@ export const routes: Routes = [
   {
     path: 'map',
     loadComponent: () =>
-      import('./map/map.component').then(m => m.MapComponent),
+      import('./features/map/map.component').then(m => m.MapComponent),
     canActivate: [authGuard]
   },
 
   {
     path: 'report',
     loadComponent: () =>
-      import('./report/report.component').then(m => m.ReportComponent),
+      import('./features/report/report.component').then(m => m.ReportComponent),
     canActivate: [authGuard]
   },
 
   {
     path: 'profile',
     loadComponent: () =>
-      import('./profile/profile.component').then(m => m.ProfileComponent),
+      import('./features/profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [authGuard]
   },
 

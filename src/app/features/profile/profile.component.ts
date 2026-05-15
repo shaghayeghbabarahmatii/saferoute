@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MContainerComponent } from '../m-framework/components/m-container/m-container.component';
+import { MContainerComponent } from '../../m-framework/components/m-container/m-container.component';
 
 @Component({
   selector: 'app-profile',

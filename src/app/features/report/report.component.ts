@@ -1,10 +1,10 @@
 import { Component, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MContainerComponent } from '../m-framework/components/m-container/m-container.component';
+import { MContainerComponent } from '../../m-framework/components/m-container/m-container.component';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, push } from 'firebase/database';
-import { environment } from '../../environments/environments';
+import { environment } from '../../../environments/environments';
 
 @Component({
   selector: 'app-report',
