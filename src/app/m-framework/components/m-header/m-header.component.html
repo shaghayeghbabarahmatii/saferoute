@@ -7,10 +7,13 @@
         <div class="nav-right">
             <ul class="pure-menu-list">
                 <li class="pure-menu-item">
-                    <a href="home" class="pure-menu-link">{{homename}}</a>
+                    <a href="map" class="pure-menu-link">Map</a>
                 </li>
-                <li *ngFor="let feature of features" class="pure-menu-item">
-                    <a href="{{feature2path(feature)}}" class="pure-menu-link">{{feature}}</a>
+                <li class="pure-menu-item">
+                    <a href="report" class="pure-menu-link">Report</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="profile" class="pure-menu-link">Profile</a>
                 </li>
             </ul>
             <button class="logout-btn" (click)="logout()">Logout</button>

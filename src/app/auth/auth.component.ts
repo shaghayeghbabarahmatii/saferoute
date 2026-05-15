@@ -38,7 +38,7 @@ export class AuthComponent {
       if (user) {
         localStorage.setItem('saferoute_auth', 'true');
         localStorage.setItem('saferoute_user', user.name);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/profile']);
       } else {
         this.errorMsg = 'Incorrect email or password.';
       }
@@ -58,7 +58,7 @@ export class AuthComponent {
       localStorage.setItem('saferoute_users', JSON.stringify(users));
       localStorage.setItem('saferoute_auth', 'true');
       localStorage.setItem('saferoute_user', this.name);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/profile']);
     }
     this.loading = false;
   }

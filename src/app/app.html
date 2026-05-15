@@ -1,6 +1,7 @@
-<m-header 
-  [title]="'SafeRoute'"
-  [homename]="'Map'"
-  [features]="['Report', 'Profile']">
-</m-header>
+@if (showNav) {
+  <m-header
+    [title]="'SafeRoute'"
+    [features]="[]">
+  </m-header>
+}
 <router-outlet></router-outlet>
