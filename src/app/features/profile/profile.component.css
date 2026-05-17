@@ -1,0 +1,64 @@
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1.5px solid #E5E7EB;
+}
+
+.avatar {
+  font-size: 3rem;
+  background: #F3F4F6;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-info h2 { margin: 0 0 4px; color: #1F2937; font-size: 1.3rem; }
+.profile-info p { margin: 0; color: #6B7280; font-size: 0.9rem; }
+
+.stats-grid {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  flex: 1;
+  background: #F9FAFB;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-value { font-size: 1.8rem; font-weight: 700; color: #F97316; }
+.stat-label { font-size: 0.75rem; color: #6B7280; margin-top: 4px; }
+
+h3 { color: #1F2937; margin: 0 0 16px; font-size: 1.1rem; }
+
+.leaderboard { display: flex; flex-direction: column; gap: 10px; }
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #F9FAFB;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 10px;
+}
+
+.leaderboard-item.gold { border-color: #F59E0B; background: #FFFBEB; }
+.leaderboard-item.silver { border-color: #9CA3AF; background: #F9FAFB; }
+.leaderboard-item.bronze { border-color: #F97316; background: #FFF7ED; }
+
+.rank { width: 32px; font-size: 1.1rem; font-weight: 700; color: #6B7280; }
+.name { flex: 1; font-weight: 600; color: #1F2937; font-size: 0.95rem; }
+.score { font-weight: 700; color: #F97316; font-size: 0.95rem; }

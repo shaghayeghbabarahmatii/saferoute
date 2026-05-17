@@ -16,7 +16,9 @@ export class App {
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showNav = !event.url.includes('/login');
+        this.showNav = !event.url.includes('/login') && 
+                       !event.url.includes('/home') &&
+                       event.url !== '/';
       }
     });
   }

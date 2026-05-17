@@ -2,7 +2,13 @@ import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./features/home/home.component').then(m => m.HomeComponent)
+  },
 
   {
     path: 'login',
@@ -25,11 +31,25 @@ export const routes: Routes = [
   },
 
   {
+    path: 'report-detail',
+    loadComponent: () =>
+      import('./features/report-detail/report-detail.component').then(m => m.ReportDetailComponent),
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'safe-route',
+    loadComponent: () =>
+      import('./features/safe-route/safe-route.component').then(m => m.SafeRouteComponent),
+    canActivate: [authGuard]
+  },
+
+  {
     path: 'profile',
     loadComponent: () =>
       import('./features/profile/profile.component').then(m => m.ProfileComponent),
     canActivate: [authGuard]
   },
 
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'home' }
 ];

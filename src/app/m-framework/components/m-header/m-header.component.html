@@ -7,13 +7,16 @@
         <div class="nav-right">
             <ul class="pure-menu-list">
                 <li class="pure-menu-item">
-                    <a href="map" class="pure-menu-link">Map</a>
+                    <a href="map" class="pure-menu-link" [class.active]="isActive('map')">Map</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="report" class="pure-menu-link">Report</a>
+                    <a href="report" class="pure-menu-link" [class.active]="isActive('report')">Report</a>
                 </li>
                 <li class="pure-menu-item">
-                    <a href="profile" class="pure-menu-link">Profile</a>
+                    <a href="safe-route" class="pure-menu-link" [class.active]="isActive('safe-route')">Safe Route</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="profile" class="pure-menu-link" [class.active]="isActive('profile')">Profile</a>
                 </li>
             </ul>
             <button class="logout-btn" (click)="logout()">Logout</button>

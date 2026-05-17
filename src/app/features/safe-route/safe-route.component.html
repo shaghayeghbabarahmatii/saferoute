@@ -1,0 +1,52 @@
+<m-container>
+  <h2>🛡️ Safe Route</h2>
+  <p class="subtitle">Find the safest route to your destination.</p>
+
+  <div class="form-group">
+    <label>📍 Your Current Location</label>
+    <input type="text" value="Detected automatically" disabled />
+  </div>
+
+  <div class="form-group">
+    <label>🏁 Destination</label>
+    <input type="text" [(ngModel)]="destination" placeholder="Enter your destination..." />
+  </div>
+
+  <button class="btn-check" (click)="checkRoute()">Check Safe Route</button>
+
+  @if (routeChecked) {
+    <div class="map-placeholder">
+      <div class="map-icon">🗺️</div>
+      <p>Route Map</p>
+      <span>Google Maps route integration coming soon</span>
+    </div>
+
+    <div class="warning-card">
+      <h3>⚠️ Hazard Zones Detected</h3>
+      <div class="hazard-item">
+        <span class="hazard-icon">🔴</span>
+        <div>
+          <p class="hazard-title">Security Concern — High Severity</p>
+          <p class="hazard-desc">Suspicious activity near parking lot on your route.</p>
+        </div>
+      </div>
+      <div class="hazard-item">
+        <span class="hazard-icon">🟠</span>
+        <div>
+          <p class="hazard-title">Poorly Lit Street — Medium Severity</p>
+          <p class="hazard-desc">Dark alley with no street lights reported 2 hours ago.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <h3>🤖 AI Route Advisory</h3>
+      <p>"This route passes through 2 reported hazard zones. Consider taking the alternative route via Sheikh Zayed Road for a safer journey."</p>
+    </div>
+
+    <div class="route-buttons">
+      <button class="btn-original">Use Original Route</button>
+      <button class="btn-alternate">Use Alternate Route</button>
+    </div>
+  }
+</m-container>

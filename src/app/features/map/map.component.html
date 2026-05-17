@@ -1,4 +1,66 @@
 <m-container>
   <h2>🗺️ Safety Map</h2>
-  <p>Map Coming Soon</p>
+  <p class="subtitle">Live heatmap of safety reports in your area.</p>
+
+  <div class="filter-bar">
+    <select class="filter-select">
+      <option value="">All Categories</option>
+      <option>Poorly Lit Street</option>
+      <option>Damaged Infrastructure</option>
+      <option>Security Concern</option>
+      <option>Environmental Hazard</option>
+    </select>
+    <select class="filter-select">
+      <option value="">All Severities</option>
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select>
+    <select class="filter-select">
+      <option value="">All Time</option>
+      <option>Last 24 Hours</option>
+      <option>Last Week</option>
+    </select>
+  </div>
+
+  <div class="map-placeholder">
+    <div class="map-icon">🗺️</div>
+    <p>Live Heatmap</p>
+    <span>Google Maps integration coming soon</span>
+  </div>
+
+  <div class="legend">
+    <span class="legend-title">Severity:</span>
+    <span class="legend-item low">🟢 Low</span>
+    <span class="legend-item medium">🟠 Medium</span>
+    <span class="legend-item high">🔴 High</span>
+  </div>
+
+  <h3>Recent Reports</h3>
+  <div class="report-list">
+    <a href="report-detail" class="report-item">
+      <div class="report-header">
+        <span class="category">Poorly Lit Street</span>
+        <span class="severity high">High</span>
+      </div>
+      <p>Dark alley near the main road with no street lights.</p>
+      <span class="timestamp">2 hours ago →</span>
+    </a>
+    <a href="report-detail" class="report-item">
+      <div class="report-header">
+        <span class="category">Damaged Infrastructure</span>
+        <span class="severity medium">Medium</span>
+      </div>
+      <p>Large pothole on the main street causing traffic issues.</p>
+      <span class="timestamp">5 hours ago →</span>
+    </a>
+    <a href="report-detail" class="report-item">
+      <div class="report-header">
+        <span class="category">Security Concern</span>
+        <span class="severity low">Low</span>
+      </div>
+      <p>Suspicious activity reported near the parking lot.</p>
+      <span class="timestamp">1 day ago →</span>
+    </a>
+  </div>
 </m-container>

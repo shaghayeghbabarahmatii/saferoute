@@ -1,0 +1,104 @@
+.btn-back {
+  background: none;
+  border: none;
+  color: #F97316;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.report-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.category-badge {
+  background: #FFF7ED;
+  border: 1.5px solid #F97316;
+  color: #F97316;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.severity {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+}
+
+.severity.high { background: #EF4444; }
+.severity.medium { background: #F97316; }
+.severity.low { background: #22C55E; }
+
+h2 { color: #1F2937; margin: 0 0 20px; }
+h3 { color: #1F2937; margin: 0 0 12px; font-size: 1rem; }
+
+.detail-card {
+  background: #F9FAFB;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #E5E7EB;
+  font-size: 0.9rem;
+}
+
+.detail-row:last-child { border-bottom: none; }
+.detail-label { color: #6B7280; }
+.detail-value { color: #1F2937; font-weight: 500; }
+.detail-value.verified { color: #22C55E; font-weight: 600; }
+
+.description-card {
+  background: #F9FAFB;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.description-card p { color: #6B7280; font-size: 0.9rem; margin: 0; line-height: 1.6; }
+
+.ai-card {
+  background: #FFF7ED;
+  border: 1.5px solid #F97316;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.ai-type, .ai-authority { font-size: 0.9rem; color: #374151; margin: 0 0 8px; }
+.ai-recommendation {
+  font-size: 0.85rem;
+  color: #6B7280;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.action-buttons { display: flex; gap: 12px; }
+
+.btn-upvote {
+  flex: 1; padding: 12px; background: #22C55E; color: white;
+  border: none; border-radius: 8px; font-weight: 600;
+  font-size: 0.95rem; cursor: pointer;
+}
+
+.btn-dispute {
+  flex: 1; padding: 12px; background: white; color: #EF4444;
+  border: 2px solid #EF4444; border-radius: 8px; font-weight: 600;
+  font-size: 0.95rem; cursor: pointer;
+}

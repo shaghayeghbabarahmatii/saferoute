@@ -1,10 +1,8 @@
-import { Component, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MContainerComponent } from '../../m-framework/components/m-container/m-container.component';
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push } from 'firebase/database';
-import { environment } from '../../../environments/environments';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-report',
@@ -15,7 +13,7 @@ import { environment } from '../../../environments/environments';
 })
 export class ReportComponent {
   private cdr = inject(ChangeDetectorRef);
-  private db: any;
+  private firebaseService = inject(FirebaseService);
 
   categories = ['Poorly Lit Street', 'Damaged Infrastructure',
                 'Security Concern', 'Environmental Hazard'];
@@ -29,11 +27,6 @@ export class ReportComponent {
   submitting = false;
   successMsg = '';
   errorMsg   = '';
-
-  constructor() {
-    const app = initializeApp(environment.firebaseConfig);
-    this.db = getDatabase(app);
-  }
 
   getLocation() {
     if (!navigator.geolocation) {
@@ -56,7 +49,7 @@ export class ReportComponent {
     );
   }
 
-  async submitReport() {
+  submitReport() {
     if (!this.category || !this.severity || !this.description) {
       this.errorMsg = 'Please fill in all fields.';
       return;
@@ -65,21 +58,32 @@ export class ReportComponent {
       this.errorMsg = 'Please capture your location first.';
       return;
     }
+
     this.submitting = true;
     this.errorMsg   = '';
     this.successMsg = '';
     this.cdr.detectChanges();
+
     try {
       const uid = localStorage.getItem('saferoute_user') || 'anonymous';
-      await push(ref(this.db, 'reports'), {
-        uid, category: this.category, severity: this.severity,
-        description: this.description, lat: this.coords.lat,
-        lng: this.coords.lng, timestamp: Date.now(),
-        upvotes: 0, disputes: 0, verified: false
+      this.firebaseService.saveReport({
+        uid,
+        category:    this.category,
+        severity:    this.severity,
+        description: this.description,
+        lat:         this.coords.lat,
+        lng:         this.coords.lng,
+        timestamp:   Date.now(),
+        upvotes:     0,
+        disputes:    0,
+        verified:    false
       });
+
       this.successMsg  = '✅ Report submitted successfully!';
-      this.category = ''; this.severity = '';
-      this.description = ''; this.coords = null;
+      this.category    = '';
+      this.severity    = '';
+      this.description = '';
+      this.coords      = null;
       this.locationStatus = '';
       this.cdr.detectChanges();
     } catch (e) {

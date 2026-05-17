@@ -1,0 +1,79 @@
+.subtitle { color: #6B7280; margin: 0 0 24px; }
+
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block; font-weight: 600;
+  font-size: 0.85rem; color: #374151; margin-bottom: 8px;
+}
+.form-group input {
+  width: 100%; padding: 10px 14px; border: 1.5px solid #D1D5DB;
+  border-radius: 8px; font-size: 1rem; box-sizing: border-box;
+}
+.form-group input:focus { outline: none; border-color: #F97316; }
+.form-group input:disabled { background: #F3F4F6; color: #9CA3AF; }
+
+.btn-check {
+  width: 100%; padding: 13px; background: #F97316; color: white;
+  border: none; border-radius: 8px; font-size: 1rem;
+  font-weight: 600; cursor: pointer; margin-bottom: 24px;
+  transition: background 0.2s;
+}
+.btn-check:hover { background: #EA6C0A; }
+
+.map-placeholder {
+  background: #F3F4F6;
+  border: 2px dashed #D1D5DB;
+  border-radius: 12px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #9CA3AF;
+}
+.map-icon { font-size: 2.5rem; margin-bottom: 8px; }
+.map-placeholder p { font-size: 1rem; font-weight: 600; margin: 0 0 4px; color: #6B7280; }
+.map-placeholder span { font-size: 0.85rem; }
+
+.warning-card {
+  background: #FFF7ED;
+  border: 1.5px solid #F97316;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.warning-card h3 { color: #1F2937; margin: 0 0 16px; font-size: 1rem; }
+
+.hazard-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.hazard-item:last-child { margin-bottom: 0; }
+.hazard-icon { font-size: 1.2rem; }
+.hazard-title { font-size: 0.9rem; font-weight: 600; color: #1F2937; margin: 0 0 4px; }
+.hazard-desc { font-size: 0.85rem; color: #6B7280; margin: 0; }
+
+.ai-card {
+  background: #F0FDF4;
+  border: 1.5px solid #22C55E;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+.ai-card h3 { color: #1F2937; margin: 0 0 10px; font-size: 1rem; }
+.ai-card p { color: #6B7280; font-size: 0.9rem; font-style: italic; margin: 0; line-height: 1.5; }
+
+.route-buttons { display: flex; gap: 12px; }
+.btn-original {
+  flex: 1; padding: 12px; background: white; color: #F97316;
+  border: 2px solid #F97316; border-radius: 8px; font-weight: 600;
+  font-size: 0.95rem; cursor: pointer;
+}
+.btn-alternate {
+  flex: 1; padding: 12px; background: #F97316; color: white;
+  border: none; border-radius: 8px; font-weight: 600;
+  font-size: 0.95rem; cursor: pointer;
+}

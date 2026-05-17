@@ -41,7 +41,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 24px;
+  gap: 8px;
 }
 .pure-menu-item { list-style: none; }
 .pure-menu-link {
@@ -49,8 +49,14 @@
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
+  padding: 6px 12px;
+  transition: color 0.2s;
 }
 .pure-menu-link:hover { color: #F97316; }
+.pure-menu-link.active {
+  color: #F97316;
+  font-weight: 700;
+}
 .logout-btn {
   background: #F97316;
   color: white;
