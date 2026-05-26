@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push, onValue } from 'firebase/database';
+import { getDatabase, ref, push, onValue, update, get } from 'firebase/database';
 import { environment } from '../../environments/environments';
 
 const app = initializeApp(environment.firebaseConfig);
@@ -28,6 +28,26 @@ export class FirebaseService {
         callback([]);
       }
     });
+  }
+
+  async upvoteReport(id: string): Promise<void> {
+    const reportRef = ref(db, `reports/${id}`);
+    const snapshot = await get(reportRef);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const newUpvotes = (data.upvotes || 0) + 1;
+      const verified = newUpvotes >= 3;
+      await update(reportRef, { upvotes: newUpvotes, verified });
+    }
+  }
+
+  async disputeReport(id: string): Promise<void> {
+    const reportRef = ref(db, `reports/${id}`);
+    const snapshot = await get(reportRef);
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      await update(reportRef, { disputes: (data.disputes || 0) + 1 });
+    }
   }
 
   saveUser(uid: string, userData: any): void {

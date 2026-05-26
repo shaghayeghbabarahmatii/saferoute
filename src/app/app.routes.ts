@@ -31,7 +31,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'report-detail',
+    path: 'report-detail/:id',
     loadComponent: () =>
       import('./features/report-detail/report-detail.component').then(m => m.ReportDetailComponent),
     canActivate: [authGuard]

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MContainerComponent } from '../../m-framework/components/m-container/m-container.component';
 import { FirebaseService } from '../../services/firebase.service';
+import { GeminiService } from '../../services/gemini.service';
 
 @Component({
   selector: 'app-report',
@@ -14,6 +15,7 @@ import { FirebaseService } from '../../services/firebase.service';
 export class ReportComponent {
   private cdr = inject(ChangeDetectorRef);
   private firebaseService = inject(FirebaseService);
+  private geminiService = inject(GeminiService);
 
   categories = ['Poorly Lit Street', 'Damaged Infrastructure',
                 'Security Concern', 'Environmental Hazard'];
@@ -27,6 +29,8 @@ export class ReportComponent {
   submitting = false;
   successMsg = '';
   errorMsg   = '';
+  aiResult   = '';
+  aiLoading  = false;
 
   getLocation() {
     if (!navigator.geolocation) {
@@ -49,7 +53,7 @@ export class ReportComponent {
     );
   }
 
-  submitReport() {
+  async submitReport() {
     if (!this.category || !this.severity || !this.description) {
       this.errorMsg = 'Please fill in all fields.';
       return;
@@ -62,37 +66,48 @@ export class ReportComponent {
     this.submitting = true;
     this.errorMsg   = '';
     this.successMsg = '';
+    this.aiResult   = '';
     this.cdr.detectChanges();
 
-    try {
-      const uid = localStorage.getItem('saferoute_user') || 'anonymous';
-      this.firebaseService.saveReport({
-        uid,
-        category:    this.category,
-        severity:    this.severity,
-        description: this.description,
-        lat:         this.coords.lat,
-        lng:         this.coords.lng,
-        timestamp:   Date.now(),
-        upvotes:     0,
-        disputes:    0,
-        verified:    false
-      });
+    // Step 1 — Save report to Firebase
+    const uid = localStorage.getItem('saferoute_user') || 'anonymous';
+    const savedCategory = this.category;
+    const savedDescription = this.description;
 
-      this.successMsg  = '✅ Report submitted successfully!';
-      this.category    = '';
-      this.severity    = '';
-      this.description = '';
-      this.coords      = null;
-      this.locationStatus = '';
-      this.cdr.detectChanges();
+    this.firebaseService.saveReport({
+      uid,
+      category:    this.category,
+      severity:    this.severity,
+      description: this.description,
+      lat:         this.coords.lat,
+      lng:         this.coords.lng,
+      timestamp:   Date.now(),
+      upvotes:     0,
+      disputes:    0,
+      verified:    false
+    });
+
+    this.successMsg  = '✅ Report submitted successfully!';
+    this.category    = '';
+    this.severity    = '';
+    this.description = '';
+    this.coords      = null;
+    this.locationStatus = '';
+    this.submitting  = false;
+    this.cdr.detectChanges();
+
+    // Step 2 — Call Gemini AI separately
+    this.aiLoading = true;
+    this.cdr.detectChanges();
+    try {
+      this.aiResult = await this.geminiService.classifyHazard(
+        savedCategory,
+        savedDescription
+      );
     } catch (e) {
-      console.error(e);
-      this.errorMsg = 'Failed to submit report. Please try again.';
-      this.cdr.detectChanges();
-    } finally {
-      this.submitting = false;
-      this.cdr.detectChanges();
+      this.aiResult = 'AI classification unavailable at this time.';
     }
+    this.aiLoading = false;
+    this.cdr.detectChanges();
   }
 }

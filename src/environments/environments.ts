@@ -8,5 +8,7 @@ export const environment = {
     storageBucket: "saferoute-1080b.firebasestorage.app",
     messagingSenderId: "451801554863",
     appId: "1:451801554863:web:9e78905758b6fe756b595a"
-  }
+  },
+  googleMapsApiKey: "AIzaSyCXsvD1Is-tTuB9aAiHj_1aGt7gidQU6ME",
+  geminiApiKey: "AIzaSyC6pkXyhV1KQaAQ9gfFdPvNbCihlXYXuiI"
 };

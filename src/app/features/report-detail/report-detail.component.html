@@ -1,46 +1,61 @@
 <m-container>
   <button class="btn-back" (click)="goBack()">← Back to Map</button>
 
-  <div class="report-detail-header">
-    <div class="category-badge">Security Concern</div>
-    <span class="severity high">High</span>
-  </div>
+  @if (loading) {
+    <p>Loading report...</p>
+  }
 
-  <h2>Report Details</h2>
+  @if (!loading && !report) {
+    <p>Report not found.</p>
+  }
 
-  <div class="detail-card">
-    <div class="detail-row">
-      <span class="detail-label">📍 Location</span>
-      <span class="detail-value">24.46964, 54.37430</span>
+  @if (report) {
+    <div class="report-detail-header">
+      <div class="category-badge">{{ report.category }}</div>
+      <span class="severity {{ report.severity.toLowerCase() }}">{{ report.severity }}</span>
     </div>
-    <div class="detail-row">
-      <span class="detail-label">🕒 Reported</span>
-      <span class="detail-value">2 hours ago</span>
-    </div>
-    <div class="detail-row">
-      <span class="detail-label">👤 Reported by</span>
-      <span class="detail-value">Anonymous User</span>
-    </div>
-    <div class="detail-row">
-      <span class="detail-label">✅ Status</span>
-      <span class="detail-value verified">Verified</span>
-    </div>
-  </div>
 
-  <div class="description-card">
-    <h3>Description</h3>
-    <p>Suspicious activity reported near the parking lot. Poor lighting and no security cameras in the area. Multiple residents have reported feeling unsafe at night.</p>
-  </div>
+    <h2>Report Details</h2>
 
-  <div class="ai-card">
-    <h3>🤖 AI Hazard Classification</h3>
-    <p class="ai-type">Hazard Type: <strong>Urban Security Threat</strong></p>
-    <p class="ai-authority">Notify: <strong>Traffic Police & Civil Defense</strong></p>
-    <p class="ai-recommendation">"Avoid this area after dark. Report to the municipality via their hotline and consider using alternative routes."</p>
-  </div>
+    <div class="detail-card">
+      <div class="detail-row">
+        <span class="detail-label">📍 Location</span>
+        <span class="detail-value">{{ report.lat.toFixed(5) }}, {{ report.lng.toFixed(5) }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">🕒 Reported</span>
+        <span class="detail-value">{{ getTimestamp(report.timestamp) }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">👤 Reported by</span>
+        <span class="detail-value">{{ report.uid || 'Anonymous' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">✅ Status</span>
+        <span class="detail-value" [class.verified]="report.verified">
+          {{ report.verified ? 'Verified' : 'Unverified' }}
+        </span>
+      </div>
+    </div>
 
-  <div class="action-buttons">
-    <button class="btn-upvote">👍 Upvote (12)</button>
-    <button class="btn-dispute">⚠️ Dispute (2)</button>
-  </div>
+    <div class="description-card">
+      <h3>Description</h3>
+      <p>{{ report.description }}</p>
+    </div>
+
+    <div class="ai-card">
+      <h3>🤖 AI Hazard Classification</h3>
+      @if (aiLoading) {
+        <p class="ai-recommendation">Analyzing hazard...</p>
+      }
+      @if (!aiLoading && aiResult) {
+        <p class="ai-recommendation">{{ aiResult }}</p>
+      }
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-upvote" (click)="upvote()">👍 Upvote ({{ report.upvotes || 0 }})</button>
+      <button class="btn-dispute" (click)="dispute()">⚠️ Dispute ({{ report.disputes || 0 }})</button>
+    </div>
+  }
 </m-container>
