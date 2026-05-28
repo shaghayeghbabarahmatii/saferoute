@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push, onValue, update, get } from 'firebase/database';
+import { getDatabase, ref, push, onValue, update, get, set } from 'firebase/database';
 import { environment } from '../../environments/environments';
 
 const app = initializeApp(environment.firebaseConfig);
@@ -51,7 +51,7 @@ export class FirebaseService {
   }
 
   saveUser(uid: string, userData: any): void {
-    push(ref(db, `users/${uid}`), userData);
+    set(ref(db, `users/${uid}`), userData);
   }
 
   getUser(uid: string, callback: (user: any) => void): void {

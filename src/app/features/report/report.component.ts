@@ -113,7 +113,7 @@ export class ReportComponent {
     this.cdr.detectChanges();
 
     // Wait 4 seconds so user can read AI result, then reset everything
-    await new Promise(resolve => setTimeout(resolve, 4000));
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
     this.category    = '';
     this.severity    = '';

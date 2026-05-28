@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
