@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-auth',
@@ -18,7 +19,7 @@ export class AuthComponent {
   errorMsg = '';
   loading = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private firebaseService: FirebaseService) {}
 
   toggleMode() {
     this.isLogin = !this.isLogin;
@@ -58,6 +59,17 @@ export class AuthComponent {
       localStorage.setItem('saferoute_users', JSON.stringify(users));
       localStorage.setItem('saferoute_auth', 'true');
       localStorage.setItem('saferoute_user', this.name);
+
+      // Save user to Firebase
+      this.firebaseService.saveUser(this.name, {
+        name: this.name,
+        email: this.email,
+        reportsSubmitted: 0,
+        safetyScore: 0,
+        verifiedReports: 0,
+        createdAt: Date.now()
+      });
+
       this.router.navigate(['/map']);
     }
     this.loading = false;

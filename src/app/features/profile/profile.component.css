@@ -50,14 +50,25 @@ h3 { color: #1F2937; margin: 0 0 16px; font-size: 1.1rem; }
   display: flex;
   align-items: center;
   padding: 12px 16px;
-  background: #F9FAFB;
-  border: 1.5px solid #E5E7EB;
   border-radius: 10px;
+  border: 1.5px solid #E5E7EB;
+  background: #F9FAFB;
 }
 
-.leaderboard-item.gold { border-color: #F59E0B; background: #FFFBEB; }
-.leaderboard-item.silver { border-color: #9CA3AF; background: #F9FAFB; }
-.leaderboard-item.bronze { border-color: #F97316; background: #FFF7ED; }
+.leaderboard-item.gold {
+  border-color: #F59E0B;
+  background: #FFFBEB;
+}
+
+.leaderboard-item.silver {
+  border-color: #9CA3AF;
+  background: #EFF6FF;
+}
+
+.leaderboard-item.bronze {
+  border-color: #F97316;
+  background: #FFF7ED;
+}
 
 .rank { width: 32px; font-size: 1.1rem; font-weight: 700; color: #6B7280; }
 .name { flex: 1; font-weight: 600; color: #1F2937; font-size: 0.95rem; }

@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
     this.userEmail = user ? user.email : '';
 
     this.firebaseService.getReports((reports) => {
-      // Count current user's reports
       const myReports = reports.filter(r => r.uid === this.userName);
       this.reportsSubmitted = myReports.length;
       this.verifiedReports = myReports.filter(r => r.verified).length;
@@ -37,7 +36,6 @@ export class ProfileComponent implements OnInit {
         return score + points + (r.upvotes || 0) * 2;
       }, 0);
 
-      // Build leaderboard from all users
       const userScores: { [key: string]: number } = {};
       reports.forEach(r => {
         if (!r.uid) return;

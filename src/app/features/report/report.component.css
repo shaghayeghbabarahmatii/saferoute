@@ -29,14 +29,56 @@ select:focus, textarea:focus { outline: none; border-color: #F97316; }
 .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 .error   { color: #EF4444; font-size: 0.9rem; margin-bottom: 10px; }
 .success { color: #22C55E; font-size: 0.9rem; margin-bottom: 10px; }
-
-
 .ai-card {
-  background: #FFF7ED;
-  border: 1.5px solid #F97316;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 16px;
+  background: #FFF7ED; border: 1.5px solid #F97316;
+  border-radius: 12px; padding: 20px; margin-bottom: 16px;
 }
 .ai-card h3 { color: #1F2937; margin: 0 0 10px; font-size: 1rem; }
 .ai-text { color: #6B7280; font-size: 0.9rem; font-style: italic; margin: 0; line-height: 1.5; }
+
+.manual-section {
+  margin-top: 16px;
+  background: #F9FAFB;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 16px;
+}
+.manual-section-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6B7280;
+  margin: 0 0 12px;
+}
+.manual-coords {
+  display: flex;
+  gap: 12px;
+}
+.coord-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.coord-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+}
+.coord-field input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #D1D5DB;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  background: white;
+}
+.coord-field input:focus {
+  outline: none;
+  border-color: #F97316;
+}
+.location-hint {
+  font-size: 0.8rem;
+  color: #9CA3AF;
+  margin: 10px 0 0;
+}
