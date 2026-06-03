@@ -69,3 +69,28 @@
   transition: background 0.2s;
 }
 .logout-btn:hover { background: #EA6C0A; }
+
+@media (max-width: 600px) {
+  .home-menu {
+    padding: 0 12px;
+    height: 56px;
+  }
+  .logo-title {
+    font-size: 1rem;
+  }
+  .logo-container img {
+    width: 28px;
+    height: 28px;
+  }
+  .pure-menu-list {
+    gap: 2px;
+  }
+  .pure-menu-link {
+    font-size: 0.78rem;
+    padding: 4px 6px;
+  }
+  .logout-btn {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+}
