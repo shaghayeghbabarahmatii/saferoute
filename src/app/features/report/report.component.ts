@@ -34,6 +34,48 @@ export class ReportComponent {
   manualLat: number | null = null;
   manualLng: number | null = null;
 
+  photoPreview: string = '';
+  photoBase64: string = '';
+  photoType: string = '';
+  analyzingPhoto: boolean = false;
+
+  onPhotoSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (!file) return;
+    this.photoType = file.type;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.photoPreview = reader.result as string;
+      this.photoBase64 = this.photoPreview.split(',')[1];
+      this.cdr.detectChanges();
+      this.analyzePhoto();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async analyzePhoto() {
+    if (!this.photoBase64) return;
+    this.analyzingPhoto = true;
+    this.cdr.detectChanges();
+    try {
+      const result = await this.geminiService.analyzeHazardPhoto(
+        this.photoBase64, this.photoType
+      );
+      this.description = result;
+    } catch (e) {
+      this.description = '';
+    }
+    this.analyzingPhoto = false;
+    this.cdr.detectChanges();
+  }
+
+  removePhoto() {
+    this.photoPreview = '';
+    this.photoBase64 = '';
+    this.photoType = '';
+    this.cdr.detectChanges();
+  }
+
   getLocation() {
     if (!navigator.geolocation) {
       this.locationStatus = 'Geolocation not supported.';
@@ -80,7 +122,6 @@ export class ReportComponent {
     const savedCategory = this.category;
     const savedDescription = this.description;
 
-    // Save to Firebase
     this.firebaseService.saveReport({
       uid,
       category:    savedCategory,
@@ -91,7 +132,9 @@ export class ReportComponent {
       timestamp:   Date.now(),
       upvotes:     0,
       disputes:    0,
-      verified:    false
+      verified:    false,
+      photoBase64: this.photoBase64 || null,
+      photoType:   this.photoType || null
     });
 
     this.successMsg = '✅ Report submitted! Analyzing with AI...';
@@ -99,7 +142,6 @@ export class ReportComponent {
     this.submitting = false;
     this.cdr.detectChanges();
 
-    // Get AI result — form stays filled during this
     try {
       this.aiResult = await this.geminiService.classifyHazard(
         savedCategory, savedDescription
@@ -112,18 +154,20 @@ export class ReportComponent {
     this.successMsg = '✅ Report submitted successfully!';
     this.cdr.detectChanges();
 
-    // Wait 4 seconds so user can read AI result, then reset everything
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    await new Promise(resolve => setTimeout(resolve, 4000));
 
-    this.category    = '';
-    this.severity    = '';
-    this.description = '';
-    this.coords      = null;
+    this.category     = '';
+    this.severity     = '';
+    this.description  = '';
+    this.coords       = null;
     this.locationStatus = '';
-    this.manualLat   = null;
-    this.manualLng   = null;
-    this.successMsg  = '';
-    this.aiResult    = '';
+    this.manualLat    = null;
+    this.manualLng    = null;
+    this.successMsg   = '';
+    this.aiResult     = '';
+    this.photoPreview = '';
+    this.photoBase64  = '';
+    this.photoType    = '';
     this.cdr.detectChanges();
   }
 }

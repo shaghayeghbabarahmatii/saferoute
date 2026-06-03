@@ -17,6 +17,13 @@
 
     <h2>Report Details</h2>
 
+    @if (report.photoBase64) {
+      <div class="photo-section">
+        <img [src]="'data:' + report.photoType + ';base64,' + report.photoBase64"
+             alt="Report Photo" class="report-photo" />
+      </div>
+    }
+
     <div class="detail-card">
       <div class="detail-row">
         <span class="detail-label">📍 Location</span>
