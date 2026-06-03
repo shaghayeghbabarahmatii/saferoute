@@ -44,7 +44,6 @@ export class GeminiService {
       body: JSON.stringify(body)
     });
     const data = await response.json();
-    console.log('Gemini image response:', data);
     if (data.error) throw new Error(data.error.message);
     return this.cleanResponse(data.candidates[0].content.parts[0].text);
   }

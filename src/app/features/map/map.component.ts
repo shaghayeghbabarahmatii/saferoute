@@ -86,11 +86,13 @@ export class MapComponent implements OnInit {
   }
 
   getTimestamp(timestamp: number): string {
-    const diff = Date.now() - timestamp;
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const days = Math.floor(hours / 24);
-    if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
-    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-    const mins = Math.floor(diff / (1000 * 60)); if (mins > 0) return `${mins} min${mins > 1 ? 's' : ''} ago`; return 'Just now';
-  }
+  const diff = Date.now() - timestamp;
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const days = Math.floor(hours / 24);
+  if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+  if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  const mins = Math.floor(diff / (1000 * 60));
+  if (mins > 0) return `${mins} min${mins > 1 ? 's' : ''} ago`;
+  return 'Just now';
+}
 }
