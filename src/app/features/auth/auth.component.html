@@ -23,6 +23,13 @@
       <input type="password" [(ngModel)]="password" placeholder="••••••••" />
     </div>
 
+    @if (!isLogin) {
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" [(ngModel)]="confirmPassword" placeholder="••••••••" />
+      </div>
+    }
+
     @if (errorMsg) {
       <p class="error">{{ errorMsg }}</p>
     }

@@ -16,6 +16,7 @@ export class AuthComponent {
   name = '';
   email = '';
   password = '';
+  confirmPassword = '';
   errorMsg = '';
   loading = false;
 
@@ -44,8 +45,13 @@ export class AuthComponent {
         this.errorMsg = 'Incorrect email or password.';
       }
     } else {
-      if (!this.name || !this.email || !this.password) {
+      if (!this.name || !this.email || !this.password || !this.confirmPassword) {
         this.errorMsg = 'Please fill in all fields.';
+        this.loading = false;
+        return;
+      }
+      if (this.password !== this.confirmPassword) {
+        this.errorMsg = 'Passwords do not match.';
         this.loading = false;
         return;
       }
@@ -60,7 +66,6 @@ export class AuthComponent {
       localStorage.setItem('saferoute_auth', 'true');
       localStorage.setItem('saferoute_user', this.name);
 
-      // Save user to Firebase
       this.firebaseService.saveUser(this.name, {
         name: this.name,
         email: this.email,
