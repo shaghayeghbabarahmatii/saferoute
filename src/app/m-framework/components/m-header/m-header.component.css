@@ -94,3 +94,11 @@
     font-size: 0.78rem;
   }
 }
+
+@media (max-width: 480px) {
+  .nav-right { gap: 8px; }
+  .pure-menu-list { gap: 0; }
+  .pure-menu-link { font-size: 0.72rem; padding: 4px 4px; }
+  .logout-btn { padding: 5px 8px; font-size: 0.72rem; }
+  .logo-title { font-size: 0.9rem; }
+}

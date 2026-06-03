@@ -91,6 +91,6 @@ export class MapComponent implements OnInit {
     const days = Math.floor(hours / 24);
     if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
     if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-    return 'Just now';
+    const mins = Math.floor(diff / (1000 * 60)); if (mins > 0) return `${mins} min${mins > 1 ? 's' : ''} ago`; return 'Just now';
   }
 }
