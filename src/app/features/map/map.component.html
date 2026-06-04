@@ -37,17 +37,12 @@
         #marker="mapMarker">
       </map-marker>
     }
-<map-info-window>
+<map-info-window [options]="{headerContent: selectedReport?.category}">
   @if (selectedReport) {
-    <div style="padding:4px 2px;">
-      <h3 style="margin:0 0 6px;font-weight:600;color:#1F2937;font-size:0.9rem;">
-        {{ selectedReport.category }}
-      </h3>
-      <a [href]="'report-detail/' + selectedReport.id"
-         style="color:#F97316;font-size:0.82rem;font-weight:600;text-decoration:none;">
-        View Details →
-      </a>
-    </div>
+    <a [href]="'report-detail/' + selectedReport.id"
+       style="color:#F97316;font-size:0.82rem;font-weight:600;text-decoration:none;">
+      View Details →
+    </a>
   }
 </map-info-window>
 

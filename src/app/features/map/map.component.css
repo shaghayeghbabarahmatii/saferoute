@@ -46,6 +46,7 @@
   gap: 16px;
   margin-bottom: 28px;
   font-size: 0.9rem;
+  padding-top: 8px;
 }
 
 .legend-title { font-weight: 600; color: #374151; }
