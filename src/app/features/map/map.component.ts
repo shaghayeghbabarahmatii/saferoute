@@ -1,23 +1,28 @@
-import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { GoogleMap, MapMarker } from '@angular/google-maps';
+import { GoogleMap, MapMarker, MapInfoWindow } from '@angular/google-maps';
 import { MContainerComponent } from '../../m-framework/components/m-container/m-container.component';
 import { FirebaseService } from '../../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-map',
   standalone: true,
-  imports: [CommonModule, FormsModule, GoogleMap, MapMarker, MContainerComponent],
+  imports: [CommonModule, FormsModule, GoogleMap, MapMarker, MapInfoWindow, MContainerComponent],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
 export class MapComponent implements OnInit {
   private firebaseService = inject(FirebaseService);
   private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
+
+  @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
 
   reports: any[] = [];
   filteredReports: any[] = [];
+  selectedReport: any = null;
 
   filterCategory = '';
   filterSeverity = '';
@@ -45,13 +50,8 @@ export class MapComponent implements OnInit {
 
   applyFilters() {
     let filtered = [...this.reports];
-
-    if (this.filterCategory) {
-      filtered = filtered.filter(r => r.category === this.filterCategory);
-    }
-    if (this.filterSeverity) {
-      filtered = filtered.filter(r => r.severity === this.filterSeverity);
-    }
+    if (this.filterCategory) filtered = filtered.filter(r => r.category === this.filterCategory);
+    if (this.filterSeverity) filtered = filtered.filter(r => r.severity === this.filterSeverity);
     if (this.filterTime) {
       const now = Date.now();
       const ranges: { [key: string]: number } = {
@@ -62,16 +62,23 @@ export class MapComponent implements OnInit {
         filtered = filtered.filter(r => now - r.timestamp < ranges[this.filterTime]);
       }
     }
-
     this.filteredReports = filtered;
     this.cdr.detectChanges();
   }
 
+  openInfoWindow(marker: MapMarker, report: any) {
+    this.selectedReport = report;
+    this.cdr.detectChanges();
+    this.infoWindow.open(marker);
+  }
+
+  goToDetail(id: string) {
+    this.router.navigate(['/report-detail', id]);
+  }
+
   getMarkerOptions(report: any): google.maps.MarkerOptions {
     const colors: { [key: string]: string } = {
-      'High': 'red',
-      'Medium': 'orange',
-      'Low': 'green'
+      'High': '#EF4444', 'Medium': '#F97316', 'Low': '#22C55E'
     };
     return {
       icon: {
@@ -86,13 +93,13 @@ export class MapComponent implements OnInit {
   }
 
   getTimestamp(timestamp: number): string {
-  const diff = Date.now() - timestamp;
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  const days = Math.floor(hours / 24);
-  if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
-  if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-  const mins = Math.floor(diff / (1000 * 60));
-  if (mins > 0) return `${mins} min${mins > 1 ? 's' : ''} ago`;
-  return 'Just now';
-}
+    const diff = Date.now() - timestamp;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const days = Math.floor(hours / 24);
+    if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+    if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    const mins = Math.floor(diff / (1000 * 60));
+    if (mins > 0) return `${mins} min${mins > 1 ? 's' : ''} ago`;
+    return 'Just now';
+  }
 }

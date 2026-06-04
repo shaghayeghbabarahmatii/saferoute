@@ -30,11 +30,28 @@
     height="400px">
     @for (report of filteredReports; track report.id) {
       <map-marker
+        #marker="mapMarker"
         [position]="{lat: report.lat, lng: report.lng}"
         [title]="report.category"
-        [options]="getMarkerOptions(report)">
+        [options]="getMarkerOptions(report)"
+        (mapClick)="openInfoWindow(marker, report)">
       </map-marker>
     }
+    <map-info-window>
+      @if (selectedReport) {
+        <div class="info-window">
+          <strong>{{ selectedReport.category }}</strong>
+          <span class="info-severity {{ selectedReport.severity.toLowerCase() }}">
+            {{ selectedReport.severity }}
+          </span>
+          <p>{{ selectedReport.description }}</p>
+          <small>{{ getTimestamp(selectedReport.timestamp) }}</small>
+          <button class="info-btn" (click)="goToDetail(selectedReport.id)">
+            View Details →
+          </button>
+        </div>
+      }
+    </map-info-window>
   </google-map>
 
   <div class="legend">
