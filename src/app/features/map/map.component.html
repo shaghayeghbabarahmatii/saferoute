@@ -30,28 +30,27 @@
     height="400px">
     @for (report of filteredReports; track report.id) {
       <map-marker
-        #marker="mapMarker"
         [position]="{lat: report.lat, lng: report.lng}"
         [title]="report.category"
         [options]="getMarkerOptions(report)"
-        (mapClick)="openInfoWindow(marker, report)">
+        (mapClick)="onMarkerClick(report, marker)"
+        #marker="mapMarker">
       </map-marker>
     }
-    <map-info-window>
-      @if (selectedReport) {
-        <div class="info-window">
-          <strong>{{ selectedReport.category }}</strong>
-          <span class="info-severity {{ selectedReport.severity.toLowerCase() }}">
-            {{ selectedReport.severity }}
-          </span>
-          <p>{{ selectedReport.description }}</p>
-          <small>{{ getTimestamp(selectedReport.timestamp) }}</small>
-          <button class="info-btn" (click)="goToDetail(selectedReport.id)">
-            View Details →
-          </button>
-        </div>
-      }
-    </map-info-window>
+  <map-info-window>
+  @if (selectedReport) {
+    <div style="padding:6px;min-width:140px;">
+      <p style="margin:0 0 8px;font-weight:600;color:#1F2937;font-size:0.9rem;">
+        {{ selectedReport.category }}
+      </p>
+      <a [href]="'report-detail/' + selectedReport.id"
+         style="color:#F97316;font-size:0.82rem;font-weight:600;text-decoration:none;">
+        View Details →
+      </a>
+    </div>
+  }
+</map-info-window>
+
   </google-map>
 
   <div class="legend">

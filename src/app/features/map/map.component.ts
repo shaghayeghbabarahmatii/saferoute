@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { GoogleMap, MapMarker, MapInfoWindow } from '@angular/google-maps';
 import { MContainerComponent } from '../../m-framework/components/m-container/m-container.component';
 import { FirebaseService } from '../../services/firebase.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -16,13 +15,12 @@ import { Router } from '@angular/router';
 export class MapComponent implements OnInit {
   private firebaseService = inject(FirebaseService);
   private cdr = inject(ChangeDetectorRef);
-  private router = inject(Router);
 
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
 
+  selectedReport: any = null;
   reports: any[] = [];
   filteredReports: any[] = [];
-  selectedReport: any = null;
 
   filterCategory = '';
   filterSeverity = '';
@@ -66,19 +64,16 @@ export class MapComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  openInfoWindow(marker: MapMarker, report: any) {
+  onMarkerClick(report: any, marker: MapMarker) {
     this.selectedReport = report;
-    this.cdr.detectChanges();
     this.infoWindow.open(marker);
-  }
-
-  goToDetail(id: string) {
-    this.router.navigate(['/report-detail', id]);
   }
 
   getMarkerOptions(report: any): google.maps.MarkerOptions {
     const colors: { [key: string]: string } = {
-      'High': '#EF4444', 'Medium': '#F97316', 'Low': '#22C55E'
+      'High': 'red',
+      'Medium': 'orange',
+      'Low': 'green'
     };
     return {
       icon: {
