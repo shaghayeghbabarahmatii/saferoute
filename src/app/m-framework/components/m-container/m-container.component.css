@@ -1,12 +1,12 @@
 :host {
   display: block;
-  padding-top: 80px;
-  padding-bottom: 40px;
+  padding-top: 25px;
+  padding-bottom: 0px;
 }
 
 .container {
   max-width: 900px;
-  margin: 40px auto;
+  margin: 16px auto;
   background: white;
   border-radius: 16px;
   padding: 36px;
@@ -15,7 +15,7 @@
 
 @media (max-width: 600px) {
   .container {
-    margin: 16px;
-    padding: 20px 16px;
+    margin: 16px 16px 0;
+    padding: 20px 16px 0;
   }
 }
