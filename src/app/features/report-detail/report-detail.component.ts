@@ -75,3 +75,4 @@ export class ReportDetailComponent implements OnInit {
 
   goBack() { this.router.navigate(['/map']); }
 }
+ 

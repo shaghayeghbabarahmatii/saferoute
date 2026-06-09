@@ -25,7 +25,7 @@ export class MapComponent implements OnInit {
   filterCategory = '';
   filterSeverity = '';
   filterTime = '';
-
+ 
   categories = ['Poorly Lit Street', 'Damaged Infrastructure', 'Security Concern', 'Environmental Hazard'];
   severities = ['Low', 'Medium', 'High'];
 

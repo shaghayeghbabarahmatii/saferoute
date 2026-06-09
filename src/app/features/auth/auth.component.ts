@@ -80,3 +80,4 @@ export class AuthComponent {
     this.loading = false;
   }
 }
+ 

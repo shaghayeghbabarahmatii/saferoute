@@ -170,4 +170,4 @@ export class ReportComponent {
     this.photoType    = '';
     this.cdr.detectChanges();
   }
-}
+} 
